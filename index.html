@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>句乐部 - 像玩游戏一样，用句子学英语</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-brand" onclick="showLanding()">句乐部</div>
+    <div class="nav-links">
+      <a href="#" onclick="showLanding()">首页</a>
+      <a href="#" onclick="showPractice()">开始练习</a>
+      <a href="#" onclick="showProgress()">我的进度</a>
+    </div>
+  </nav>
+
+  <!-- 首页 -->
+  <section id="landing" class="page active">
+    <div class="hero">
+      <h1>像玩游戏一样，用句子学英语</h1>
+      <p class="hero-sub">连对越多，越想继续。忘了的词，它比你先想起来。</p>
+      <button class="btn-primary" onclick="showPractice()">开始练习</button>
+    </div>
+
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">🎮</div>
+        <h3>连击游戏化</h3>
+        <p>节奏感、即时反馈、Perfect 评分，你的好胜心会驱动你一遍又一遍地练下去。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧠</div>
+        <h3>间隔复习</h3>
+        <p>自动算好每个知识点的最佳复习时间，你不用管，到时候它会来找你。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📝</div>
+        <h3>从句子出发</h3>
+        <p>不是孤立地背单词，而是把单词放回真实语境里练，真正能用出来的表达。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📖</div>
+        <h3>词汇拼写</h3>
+        <p>先看单词和音标记忆，然后凭记忆拼写，真正掌握每个单词的拼写。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 练习页面 -->
+  <section id="practice" class="page">
+    <!-- 课程选择 -->
+    <div id="course-select" class="course-select">
+      <h2>选择练习内容</h2>
+      <div class="course-grid" id="course-grid"></div>
+    </div>
+
+    <!-- 练习界面 -->
+    <div id="practice-area" class="practice-area hidden">
+      <!-- 进度条 -->
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+        <span class="progress-text" id="progress-text">0/0</span>
+      </div>
+
+      <!-- 连击显示 -->
+      <div class="combo-display" id="combo-display">
+        <div class="combo-count" id="combo-count">0</div>
+        <div class="combo-label">连击</div>
+      </div>
+
+      <!-- 句子/词汇显示区 -->
+      <div class="sentence-card">
+        <div class="sentence-hint" id="sentence-hint"></div>
+        <!-- 词汇练习：显示单词和音标（记忆阶段） -->
+        <div class="word-info hidden" id="word-info">
+          <div class="word-display" id="word-display"></div>
+          <div class="word-phonetic" id="word-phonetic"></div>
+        </div>
+        <div class="sentence-target" id="sentence-target"></div>
+      </div>
+
+      <!-- 输入区 -->
+      <div class="input-area">
+        <input type="text" id="typing-input" placeholder="在这里输入英文句子..." autocomplete="off" autocapitalize="off" spellcheck="false">
+      </div>
+
+      <!-- 评分反馈 -->
+      <div class="feedback" id="feedback"></div>
+
+      <!-- 操作按钮 -->
+      <div class="practice-actions">
+        <button class="btn-secondary btn-speak" onclick="speakWord()" id="btn-speak" title="播放读音">🔊 读音</button>
+        <button class="btn-secondary" onclick="skipSentence()">跳过</button>
+        <button class="btn-secondary" onclick="backToCourses()">返回课程</button>
+      </div>
+    </div>
+
+    <!-- 练习结果 -->
+    <div id="practice-result" class="practice-result hidden">
+      <h2>练习完成！</h2>
+      <div class="result-stats">
+        <div class="stat-item">
+          <div class="stat-value" id="result-total">0</div>
+          <div class="stat-label">总题数</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="result-correct">0</div>
+          <div class="stat-label">正确</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="result-accuracy">0%</div>
+          <div class="stat-label">正确率</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="result-max-combo">0</div>
+          <div class="stat-label">最高连击</div>
+        </div>
+      </div>
+      <div class="result-actions">
+        <button class="btn-primary" onclick="restartPractice()">再来一次</button>
+        <button class="btn-secondary" onclick="backToCourses()">换一个课程</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 进度页面 -->
+  <section id="progress" class="page">
+    <h2>我的学习进度</h2>
+    <div class="stats-overview">
+      <div class="overview-card">
+        <div class="overview-value" id="total-practiced">0</div>
+        <div class="overview-label">累计练习句数</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-value" id="total-accuracy">0%</div>
+        <div class="overview-label">平均正确率</div>
+      </div>
+      <div class="overview-card">
+        <div class="overview-value" id="total-combo">0</div>
+        <div class="overview-label">历史最高连击</div>
+      </div>
+    </div>
+    <div class="history-section">
+      <h3>最近练习记录</h3>
+      <div id="history-list" class="history-list"></div>
+    </div>
+  </section>
+
+  <!-- 连击特效容器 -->
+  <div id="combo-effects" class="combo-effects"></div>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
