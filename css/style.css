@@ -162,6 +162,40 @@ body {
   line-height: 1.6;
 }
 
+/* 每周过关 */
+.weekly-challenge {
+  text-align: center;
+  padding: 50px 20px 30px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.weekly-challenge h2 {
+  font-size: 32px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 12px;
+}
+
+.weekly-desc {
+  font-size: 16px;
+  color: #aaa;
+  margin-bottom: 24px;
+}
+
+.btn-weekly {
+  padding: 14px 48px;
+  font-size: 18px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.btn-weekly:hover {
+  box-shadow: 0 10px 30px rgba(240, 147, 251, 0.4);
+}
+
 /* 课程选择 */
 .course-select {
   padding: 40px 60px;
@@ -192,6 +226,11 @@ body {
   padding-left: 4px;
   border-left: 3px solid #667eea;
   padding-left: 12px;
+}
+
+.course-group-title.weekly-title {
+  color: #f093fb;
+  border-left-color: #f093fb;
 }
 
 .course-group-grid {
@@ -233,6 +272,11 @@ body {
   background: rgba(74, 222, 128, 0.1);
   padding: 2px 8px;
   border-radius: 10px;
+}
+
+.weekly-badge {
+  color: #f093fb;
+  background: rgba(240, 147, 251, 0.15);
 }
 
 .course-card .course-desc {
@@ -756,6 +800,14 @@ body {
     padding: 20px;
     flex-direction: column;
     align-items: center;
+  }
+
+  .weekly-challenge {
+    padding: 30px 20px 20px;
+  }
+
+  .weekly-challenge h2 {
+    font-size: 26px;
   }
 
   .feature-card {

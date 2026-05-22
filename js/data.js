@@ -2,6 +2,31 @@
 // 每个单元包含 sentences（句子练习）和 words（词汇练习）
 const COURSES = [
   {
+    id: 'weekly-5.22',
+    name: '5月22日 每周过关',
+    desc: '本周10个词汇 + 5个句子，挑战通关！',
+    level: '每周过关',
+    sentences: [
+      { hint: '那个士兵正朝森林移动。', target: 'The soldier is moving towards the forest.' },
+      { hint: '罗宾不知道那个人看起来是什么样子。', target: 'Robin did not know what that man looked like.' },
+      { hint: '我会待在那儿直到你回来。', target: 'I will stay there until you come back.' },
+      { hint: '你想加入哪个俱乐部？', target: 'What club do you want to join?' },
+      { hint: '她昨天走了好长一段路。', target: 'She took a long walk yesterday.' },
+    ],
+    words: [
+      { word: 'mark', phonetic: '/mɑːk/', meaning: 'n. 分数' },
+      { word: 'mad', phonetic: '/mæd/', meaning: 'adj. 很生气的；疯的' },
+      { word: 'badly', phonetic: '/ˈbædli/', meaning: 'adv. 严重地' },
+      { word: 'afraid', phonetic: '/əˈfreɪd/', meaning: 'adj. 害怕的；担心的' },
+      { word: 'enemy', phonetic: '/ˈenəmi/', meaning: 'n. 敌人' },
+      { word: 'soldier', phonetic: '/ˈsəʊldʒə(r)/', meaning: 'n. 士兵' },
+      { word: 'look', phonetic: '/lʊk/', meaning: 'n. 相貌；样子 v. 看起来' },
+      { word: 'army', phonetic: '/ˈɑːmi/', meaning: 'n. 军队' },
+      { word: 'enter', phonetic: '/ˈentə(r)/', meaning: 'v. 进入' },
+      { word: 'towards', phonetic: '/təˈwɔːdz/', meaning: 'prep. 朝；向' },
+    ]
+  },
+  {
     id: 'starter-1',
     name: 'Starter Unit 1: Hello!',
     desc: '打招呼、自我介绍、26个字母',

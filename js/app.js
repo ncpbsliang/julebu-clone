@@ -75,17 +75,19 @@ function renderCourses() {
     groups[course.level].push(course);
   });
 
-  const groupOrder = ['过渡单元', '正式单元', '下册'];
+  const groupOrder = ['每周过关', '过渡单元', '正式单元', '下册'];
   let html = '';
 
   groupOrder.forEach(level => {
     if (!groups[level]) return;
-    html += `<div class="course-group"><div class="course-group-title">${level}</div><div class="course-group-grid">`;
+    const titleClass = level === '每周过关' ? 'course-group-title weekly-title' : 'course-group-title';
+    html += `<div class="course-group"><div class="${titleClass}">${level}</div><div class="course-group-grid">`;
     groups[level].forEach(course => {
       html += `
         <div class="course-card">
           <div class="course-card-header">
             <h3>${course.name}</h3>
+            ${course.level === '每周过关' ? '<span class="course-badge weekly-badge">本周</span>' : ''}
           </div>
           <div class="course-desc">${course.desc}</div>
           <div class="course-actions">
@@ -103,6 +105,13 @@ function renderCourses() {
   });
 
   grid.innerHTML = html;
+}
+
+// 每周过关快捷入口
+function startWeeklyChallenge() {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('practice').classList.add('active');
+  startCourse('weekly-5.22', 'words');
 }
 
 // 开始课程
