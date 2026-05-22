@@ -91,9 +91,7 @@ function renderCourses() {
           </div>
           <div class="course-desc">${course.desc}</div>
           <div class="course-actions">
-            <button class="btn-mode btn-sentence" onclick="startCourse('${course.id}', 'sentences')">
-              句子练习 (${course.sentences.length}句)
-            </button>
+            ${course.sentences.length > 0 ? `<button class="btn-mode btn-sentence" onclick="startCourse('${course.id}', 'sentences')">句子练习 (${course.sentences.length}句)</button>` : ''}
             <button class="btn-mode btn-word" onclick="startCourse('${course.id}', 'words')">
               词汇练习 (${course.words.length}词)
             </button>
