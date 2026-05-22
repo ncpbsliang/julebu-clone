@@ -532,6 +532,16 @@ body {
   border-color: #fbbf24;
 }
 
+.btn-answer {
+  color: #a5b4fc;
+  background: rgba(165, 180, 252, 0.08);
+}
+
+.btn-answer:hover {
+  background: rgba(165, 180, 252, 0.18);
+  border-color: #a5b4fc;
+}
+
 /* 练习结果 */
 .practice-result {
   max-width: 500px;
