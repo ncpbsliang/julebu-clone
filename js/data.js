@@ -2,16 +2,16 @@
 // 每个单元包含 sentences（句子练习）和 words（词汇练习）
 const COURSES = [
   {
-    id: 'weekly-5.22',
-    name: '5月22日 每周过关',
-    desc: '本周10个词汇 + 5个句子，挑战通关！',
+    id: 'weekly-5.22-18',
+    name: 'May 18th 每周过关',
+    desc: '10个词汇 + 5个句子，挑战通关！',
     level: '每周过关',
     sentences: [
       { hint: '那个士兵正朝森林移动。', target: 'The soldier is moving towards the forest.' },
       { hint: '罗宾不知道那个人看起来是什么样子。', target: 'Robin did not know what that man looked like.' },
       { hint: '我会待在那儿直到你回来。', target: 'I will stay there until you come back.' },
       { hint: '你想加入哪个俱乐部？', target: 'What club do you want to join?' },
-      { hint: '她昨天走了好长一段路。', target: 'She took a long walk yesterday.' },
+      { hint: '他的数学考试成绩很差。', target: 'He got a bad mark in the maths exam.' },
     ],
     words: [
       { word: 'mark', phonetic: '/mɑːk/', meaning: 'n. 分数' },
@@ -24,6 +24,56 @@ const COURSES = [
       { word: 'army', phonetic: '/ˈɑːmi/', meaning: 'n. 军队' },
       { word: 'enter', phonetic: '/ˈentə(r)/', meaning: 'v. 进入' },
       { word: 'towards', phonetic: '/təˈwɔːdz/', meaning: 'prep. 朝；向' },
+    ]
+  },
+  {
+    id: 'weekly-5.22-19',
+    name: 'May 19th 每周过关',
+    desc: '10个词汇 + 5个句子，挑战通关！',
+    level: '每周过关',
+    sentences: [
+      { hint: '他没有抓住那个机会。', target: 'He did not take the chance.' },
+      { hint: '我想写一个故事。', target: 'I want to write a story.' },
+      { hint: '他在大自然中看到了动物。', target: 'He saw animals in nature.' },
+      { hint: '我相信她能做得更好。', target: 'I believe she can do better.' },
+      { hint: '我们收集了一些例子。', target: 'We collected some examples.' },
+    ],
+    words: [
+      { word: 'chance', phonetic: '/tʃɑːns/', meaning: 'n. 机会' },
+      { word: 'act', phonetic: '/ækt/', meaning: 'v. 扮演 n. 行为' },
+      { word: 'believe', phonetic: '/bɪˈliːv/', meaning: 'v. 相信；认为' },
+      { word: 'lose', phonetic: '/luːz/', meaning: 'v. 丢失；输掉' },
+      { word: 'improve', phonetic: '/ɪmˈpruːv/', meaning: 'v. 改进；改善' },
+      { word: 'collect', phonetic: '/kəˈlekt/', meaning: 'v. 收集；采集' },
+      { word: 'share', phonetic: '/ʃeə(r)/', meaning: 'v. 分享；合用' },
+      { word: 'example', phonetic: '/ɪɡˈzɑːmpl/', meaning: 'n. 例子；榜样' },
+      { word: 'nature', phonetic: '/ˈneɪtʃə(r)/', meaning: 'n. 自然界；大自然' },
+      { word: 'hunt', phonetic: '/hʌnt/', meaning: 'v. 打猎；搜索' },
+    ]
+  },
+  {
+    id: 'weekly-5.22-20',
+    name: 'May 20th 每周过关',
+    desc: '10个词汇 + 5个句子，挑战通关！',
+    level: '每周过关',
+    sentences: [
+      { hint: '我哥哥加入了篮球队。', target: 'My brother joined the basketball team.' },
+      { hint: '友谊是世界上最重要的东西之一。', target: 'Friendship is one of the most important things in the world.' },
+      { hint: '我正在读一本经典小说，还有几页就看完了。', target: 'I am reading a classic novel, and there are only a few pages left.' },
+      { hint: '很遗憾你错过了那场演出。', target: 'It is a pity that you missed the show.' },
+      { hint: '当他的球队进球时，他非常兴奋。', target: 'He was very excited when his team hit the net.' },
+    ],
+    words: [
+      { word: 'pity', phonetic: '/ˈpɪti/', meaning: 'n. 遗憾；可惜' },
+      { word: 'friendship', phonetic: '/ˈfrendʃɪp/', meaning: 'n. 友谊；朋友关系' },
+      { word: 'classic', phonetic: '/ˈklæsɪk/', meaning: 'n. 经典作品 adj. 经典的' },
+      { word: 'page', phonetic: '/peɪdʒ/', meaning: 'n. 页' },
+      { word: 'captain', phonetic: '/ˈkæptɪn/', meaning: 'n. 队长' },
+      { word: 'surprised', phonetic: '/səˈpraɪzd/', meaning: 'adj. 惊奇的；惊讶的' },
+      { word: 'hit', phonetic: '/hɪt/', meaning: 'v. 击；打' },
+      { word: 'net', phonetic: '/net/', meaning: 'n. 网' },
+      { word: 'excited', phonetic: '/ɪkˈsaɪtɪd/', meaning: 'adj. 激动的；兴奋的' },
+      { word: 'minute', phonetic: '/ˈmɪnɪt/', meaning: 'n. 分钟' },
     ]
   },
   {

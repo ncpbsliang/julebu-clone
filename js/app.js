@@ -108,10 +108,10 @@ function renderCourses() {
 }
 
 // 每周过关快捷入口
-function startWeeklyChallenge() {
+function startWeeklyChallenge(courseId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('practice').classList.add('active');
-  startCourse('weekly-5.22', 'words');
+  startCourse(courseId, 'words');
 }
 
 // 开始课程

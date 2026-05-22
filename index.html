@@ -50,8 +50,21 @@
 
     <div class="weekly-challenge">
       <h2>每周过关</h2>
-      <p class="weekly-desc">本周精选10个词汇 + 5个句子，挑战通关！</p>
-      <button class="btn-primary btn-weekly" onclick="startWeeklyChallenge()">开始挑战</button>
+      <p class="weekly-desc">每天10个词汇 + 5个句子，连续三天挑战通关！</p>
+      <div class="weekly-days">
+        <button class="btn-weekly-day" onclick="startWeeklyChallenge('weekly-5.22-18')">
+          <span class="day-label">Day 1</span>
+          <span class="day-date">May 18th</span>
+        </button>
+        <button class="btn-weekly-day" onclick="startWeeklyChallenge('weekly-5.22-19')">
+          <span class="day-label">Day 2</span>
+          <span class="day-date">May 19th</span>
+        </button>
+        <button class="btn-weekly-day" onclick="startWeeklyChallenge('weekly-5.22-20')">
+          <span class="day-label">Day 3</span>
+          <span class="day-date">May 20th</span>
+        </button>
+      </div>
     </div>
   </section>
 
