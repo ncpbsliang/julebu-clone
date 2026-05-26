@@ -251,13 +251,19 @@ function speakText(rate) {
   if (!text) return;
 
   speechSynthesis.cancel();
-  // Chrome bug: cancel后需要延时才能正常speak
+  // Chrome bug: cancel后需要延时才能正常speak，部分设备需要更长延时
   setTimeout(function() {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
     utterance.rate = rate;
     speechSynthesis.speak(utterance);
-  }, 100);
+    // 部分设备首次speak会被吞掉，再试一次
+    setTimeout(function() {
+      if (!speechSynthesis.speaking) {
+        speechSynthesis.speak(utterance);
+      }
+    }, 200);
+  }, 200);
 }
 
 // ========== 通用逻辑 ==========
