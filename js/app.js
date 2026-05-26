@@ -278,8 +278,6 @@ function speakText(rate) {
     speakWithBaidu(text, rate);
   }
 }
-  }
-}
 
 // ========== 通用逻辑 ==========
 
