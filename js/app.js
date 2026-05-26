@@ -237,32 +237,6 @@ function getCurrentText() {
   }
 }
 
-// 百度TTS备用方案（微信浏览器兼容）
-var _ttsAudio = null;
-function speakWithBaidu(text, rate) {
-  var spd = rate <= 0.5 ? 2 : 5;
-  var url = 'https://tts.baidu.com/text2audio?cuid=baiduid&lan=en&ctp=1&pdt=301&spd=' + spd + '&tex=' + encodeURIComponent(text);
-  try {
-    if (!_ttsAudio) {
-      _ttsAudio = document.createElement('audio');
-      _ttsAudio.setAttribute('playsinline', 'true');
-      _ttsAudio.setAttribute('webkit-playsinline', 'true');
-      document.body.appendChild(_ttsAudio);
-    }
-    _ttsAudio.src = url;
-    _ttsAudio.load();
-    var playPromise = _ttsAudio.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(function() {});
-    }
-  } catch(e) {}
-}
-
-// 检测是否微信浏览器
-function isWechat() {
-  return /MicroMessenger/i.test(navigator.userAgent);
-}
-
 function speakWord() {
   speakText(0.9);
 }
@@ -272,23 +246,18 @@ function speakSlow() {
 }
 
 function speakText(rate) {
+  if (!('speechSynthesis' in window)) return;
   const text = getCurrentText();
   if (!text) return;
 
-  // 优先用原生SpeechSynthesis（包括微信浏览器）
-  if ('speechSynthesis' in window) {
-    try {
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US';
-      utterance.rate = rate;
-      speechSynthesis.cancel();
-      speechSynthesis.speak(utterance);
-      return;
-    } catch(e) {}
-  }
-
-  // 备用：百度TTS
-  speakWithBaidu(text, rate);
+  speechSynthesis.cancel();
+  // Chrome bug: cancel后需要延时才能正常speak
+  setTimeout(function() {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = rate;
+    speechSynthesis.speak(utterance);
+  }, 100);
 }
 
 // ========== 通用逻辑 ==========
