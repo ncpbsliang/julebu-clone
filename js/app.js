@@ -227,6 +227,18 @@ function loadWord() {
 
 // ========== 读音功能 ==========
 
+// 百度TTS备用方案（微信浏览器兼容）
+function speakWithBaidu(text) {
+  const url = 'https://tts.baidu.com/text2audio?cuid=baiduid&lan=en&ctp=1&pdt=301&tex=' + encodeURIComponent(text);
+  const audio = new Audio(url);
+  audio.play().catch(() => {});
+}
+
+// 检测是否微信浏览器
+function isWechat() {
+  return /MicroMessenger/i.test(navigator.userAgent);
+}
+
 function speakWord() {
   let text = '';
   if (state.practiceMode === 'sentences') {
@@ -237,11 +249,23 @@ function speakWord() {
     if (!state.currentWord) return;
     text = state.currentWord.word;
   }
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'en-US';
-  utterance.rate = 0.9;
-  speechSynthesis.cancel();
-  speechSynthesis.speak(utterance);
+
+  // 微信浏览器直接用百度TTS
+  if (isWechat()) {
+    speakWithBaidu(text);
+    return;
+  }
+
+  // 其他浏览器用原生SpeechSynthesis
+  if ('speechSynthesis' in window) {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.9;
+    speechSynthesis.cancel();
+    speechSynthesis.speak(utterance);
+  } else {
+    speakWithBaidu(text);
+  }
 }
 
 // ========== 通用逻辑 ==========
