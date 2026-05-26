@@ -238,12 +238,24 @@ function getCurrentText() {
 }
 
 // 百度TTS备用方案（微信浏览器兼容）
+var _ttsAudio = null;
 function speakWithBaidu(text, rate) {
-  // 百度TTS spd参数：0-15，默认5，越小越慢
-  const spd = rate <= 0.5 ? 2 : 5;
-  const url = 'https://tts.baidu.com/text2audio?cuid=baiduid&lan=en&ctp=1&pdt=301&spd=' + spd + '&tex=' + encodeURIComponent(text);
-  const audio = new Audio(url);
-  audio.play().catch(() => {});
+  var spd = rate <= 0.5 ? 2 : 5;
+  var url = 'https://tts.baidu.com/text2audio?cuid=baiduid&lan=en&ctp=1&pdt=301&spd=' + spd + '&tex=' + encodeURIComponent(text);
+  try {
+    if (!_ttsAudio) {
+      _ttsAudio = document.createElement('audio');
+      _ttsAudio.setAttribute('playsinline', 'true');
+      _ttsAudio.setAttribute('webkit-playsinline', 'true');
+      document.body.appendChild(_ttsAudio);
+    }
+    _ttsAudio.src = url;
+    _ttsAudio.load();
+    var playPromise = _ttsAudio.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(function() {});
+    }
+  } catch(e) {}
 }
 
 // 检测是否微信浏览器
