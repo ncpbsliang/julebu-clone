@@ -900,3 +900,81 @@ body {
     max-width: 300px;
   }
 }
+
+/* 熊嘉宥英语打卡 */
+.jiaoyou-section {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.jiaoyou-section h2 {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.jiaoyou-units {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.jiaoyou-units .btn-weekly-day {
+  background: rgba(79, 172, 254, 0.08);
+  border: 1px solid rgba(79, 172, 254, 0.25);
+  min-width: auto;
+  padding: 16px 20px;
+}
+
+.jiaoyou-units .btn-weekly-day:hover {
+  background: rgba(79, 172, 254, 0.18);
+  border-color: #4facfe;
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.25);
+}
+
+/* 球球闯关按钮 */
+.btn-qiuqiu {
+  display: block;
+  margin: 20px auto 24px;
+  padding: 16px 48px;
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #ff6a00 0%, #ee0979 50%, #ff6a00 100%);
+  background-size: 200% 200%;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: qiuqiu-glow 2s ease-in-out infinite;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.btn-qiuqiu:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 40px rgba(238, 9, 121, 0.5);
+}
+
+.btn-qiuqiu:active {
+  transform: scale(0.97);
+}
+
+@keyframes qiuqiu-glow {
+  0%, 100% { background-position: 0% 50%; box-shadow: 0 4px 20px rgba(255, 106, 0, 0.4); }
+  50% { background-position: 100% 50%; box-shadow: 0 4px 30px rgba(238, 9, 121, 0.6); }
+}
+
+@media (max-width: 768px) {
+  .jiaoyou-units {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .btn-qiuqiu {
+    font-size: 17px;
+    padding: 14px 36px;
+  }
+}

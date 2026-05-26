@@ -75,7 +75,7 @@ function renderCourses() {
     groups[course.level].push(course);
   });
 
-  const groupOrder = ['每周过关', '过渡单元', '正式单元', '下册'];
+  const groupOrder = ['每周过关', '熊嘉宥英语打卡', '过渡单元', '正式单元', '下册'];
   let html = '';
 
   groupOrder.forEach(level => {
@@ -110,6 +110,56 @@ function startWeeklyChallenge(courseId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('practice').classList.add('active');
   startCourse(courseId, 'words');
+}
+
+// 球球闯关 — 从Unit 1-9随机选10个词
+function startQiuqiuChallenge() {
+  const unitIds = [
+    'jiaoyou-unit-1', 'jiaoyou-unit-1b',
+    'jiaoyou-unit-2', 'jiaoyou-unit-2b',
+    'jiaoyou-unit-3', 'jiaoyou-unit-3b',
+    'jiaoyou-unit-4', 'jiaoyou-unit-4b',
+    'jiaoyou-unit-5', 'jiaoyou-unit-5b',
+    'jiaoyou-unit-6', 'jiaoyou-unit-6b',
+    'jiaoyou-unit-7', 'jiaoyou-unit-7b',
+    'jiaoyou-unit-8', 'jiaoyou-unit-8b',
+    'jiaoyou-unit-9', 'jiaoyou-unit-9b',
+  ];
+  const pool = [];
+  unitIds.forEach(id => {
+    const c = COURSES.find(x => x.id === id);
+    if (c) c.words.forEach(w => pool.push(w));
+  });
+  // Fisher-Yates 洗牌取前10
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  const picked = pool.slice(0, 10);
+  const tempCourse = {
+    id: 'qiuqiu-challenge',
+    name: '球球闯关',
+    desc: 'Unit 1-9 随机10词',
+    level: '熊嘉宥英语打卡',
+    sentences: [],
+    words: picked,
+  };
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('practice').classList.add('active');
+  document.getElementById('course-select').classList.add('hidden');
+  document.getElementById('practice-area').classList.remove('hidden');
+  document.getElementById('practice-result').classList.add('hidden');
+
+  state.currentCourse = tempCourse;
+  state.practiceMode = 'words';
+  state.currentIndex = 0;
+  state.combo = 0;
+  state.maxCombo = 0;
+  state.correct = 0;
+  state.total = 0;
+  state.startTime = Date.now();
+  state.isProcessing = false;
+  loadWord();
 }
 
 // 开始课程
@@ -199,8 +249,8 @@ function loadWord() {
   const progressText = document.getElementById('progress-text');
   const wordInfo = document.getElementById('word-info');
 
-  // 只显示中文释义
-  hintEl.textContent = word.meaning;
+  // 显示音标+中文释义
+  hintEl.textContent = word.phonetic ? word.phonetic + ' ' + word.meaning : word.meaning;
 
   // 隐藏英文单词展示
   wordInfo.classList.add('hidden');
@@ -454,7 +504,11 @@ function finishPractice() {
 
 // 重新练习
 function restartPractice() {
-  startCourse(state.currentCourse.id, state.practiceMode);
+  if (state.currentCourse.id === 'qiuqiu-challenge') {
+    startQiuqiuChallenge();
+  } else {
+    startCourse(state.currentCourse.id, state.practiceMode);
+  }
 }
 
 // 连击显示
