@@ -275,20 +275,20 @@ function speakText(rate) {
   const text = getCurrentText();
   if (!text) return;
 
-  if (isWechat()) {
-    speakWithBaidu(text, rate);
-    return;
+  // 优先用原生SpeechSynthesis（包括微信浏览器）
+  if ('speechSynthesis' in window) {
+    try {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-US';
+      utterance.rate = rate;
+      speechSynthesis.cancel();
+      speechSynthesis.speak(utterance);
+      return;
+    } catch(e) {}
   }
 
-  if ('speechSynthesis' in window) {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    utterance.rate = rate;
-    speechSynthesis.cancel();
-    speechSynthesis.speak(utterance);
-  } else {
-    speakWithBaidu(text, rate);
-  }
+  // 备用：百度TTS
+  speakWithBaidu(text, rate);
 }
 
 // ========== 通用逻辑 ==========
