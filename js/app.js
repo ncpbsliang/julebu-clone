@@ -227,9 +227,21 @@ function loadWord() {
 
 // ========== 读音功能 ==========
 
+// 获取当前练习文本
+function getCurrentText() {
+  if (state.practiceMode === 'sentences') {
+    const sentence = state.currentCourse.sentences[state.currentIndex];
+    return sentence ? sentence.target : '';
+  } else {
+    return state.currentWord ? state.currentWord.word : '';
+  }
+}
+
 // 百度TTS备用方案（微信浏览器兼容）
-function speakWithBaidu(text) {
-  const url = 'https://tts.baidu.com/text2audio?cuid=baiduid&lan=en&ctp=1&pdt=301&tex=' + encodeURIComponent(text);
+function speakWithBaidu(text, rate) {
+  // 百度TTS spd参数：0-15，默认5，越小越慢
+  const spd = rate <= 0.5 ? 2 : 5;
+  const url = 'https://tts.baidu.com/text2audio?cuid=baiduid&lan=en&ctp=1&pdt=301&spd=' + spd + '&tex=' + encodeURIComponent(text);
   const audio = new Audio(url);
   audio.play().catch(() => {});
 }
@@ -240,31 +252,32 @@ function isWechat() {
 }
 
 function speakWord() {
-  let text = '';
-  if (state.practiceMode === 'sentences') {
-    const sentence = state.currentCourse.sentences[state.currentIndex];
-    if (!sentence) return;
-    text = sentence.target;
-  } else {
-    if (!state.currentWord) return;
-    text = state.currentWord.word;
-  }
+  speakText(0.9);
+}
 
-  // 微信浏览器直接用百度TTS
+function speakSlow() {
+  speakText(0.5);
+}
+
+function speakText(rate) {
+  const text = getCurrentText();
+  if (!text) return;
+
   if (isWechat()) {
-    speakWithBaidu(text);
+    speakWithBaidu(text, rate);
     return;
   }
 
-  // 其他浏览器用原生SpeechSynthesis
   if ('speechSynthesis' in window) {
     const utterance = new SpeechSynthesisUtterance(text);
     utterance.lang = 'en-US';
-    utterance.rate = 0.9;
+    utterance.rate = rate;
     speechSynthesis.cancel();
     speechSynthesis.speak(utterance);
   } else {
-    speakWithBaidu(text);
+    speakWithBaidu(text, rate);
+  }
+}
   }
 }
 

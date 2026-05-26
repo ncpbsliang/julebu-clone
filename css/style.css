@@ -621,6 +621,16 @@ body {
   border-color: #a5b4fc;
 }
 
+.btn-slow {
+  color: #86efac;
+  background: rgba(134, 239, 172, 0.08);
+}
+
+.btn-slow:hover {
+  background: rgba(134, 239, 172, 0.18);
+  border-color: #86efac;
+}
+
 /* 练习结果 */
 .practice-result {
   max-width: 500px;
